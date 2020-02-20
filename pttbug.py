@@ -36,14 +36,20 @@ if __name__ == "__main__" :
                 '16':['16.Python', 'Python'],
                 '17':['17.科技工作', 'Tech_Job'],
                 '18':['18.軟體工作', 'Soft_Job'],
-                '19':['19.海外工作', 'Oversea_Job']
+                '19':['19.海外工作', 'Oversea_Job'],
+                '000':['000.自行輸入看板']
             }
     for i in board_dict:
         print(board_dict[i][0], end=' ')
-    board = input("請輸入看板代號 : ")
+    board = input("\n請輸入看板代號 : ")
+    if '000' in board :
+        new_board = input("請輸入看板名稱 : ")
     board_index = board.split(',')
     for board_num in board_index:
-        board_url = board_dict[board_num][1]
+        if board_num == '000':
+            board_url = new_board
+        else:
+            board_url = board_dict[board_num][1]
         
         url = 'https://www.ptt.cc/bbs/' + board_url + '/index.html'
         
@@ -62,3 +68,4 @@ if __name__ == "__main__" :
                 else:
                     print(entry.select('.nrec')[0].text,'\t',entry.select('.title')[0].text.replace('\n', ''),entry.select('.date')[0].text,entry.select('.author')[0].text)
         print('*********************************************************')
+    input("爬蟲完畢,請按Enter鍵離開")
